@@ -1,55 +1,54 @@
-//looks good 
-
-const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
-const sequelize = require('../config/config');
+const { Model, DataTypes } = require("sequelize");
+const bcrypt = require("bcrypt");
+const sequelize = require("../config/config");
 
 class User extends Model {
-    verifyPass(pass) {
-        return bcrypt.compareSync(pass, this.password)
-    }
+  static async hashPassword(password) {
+    return bcrypt.hash(password, 10);
+  }
+
+  static async verifyPassword(password, hashedPassword) {
+    return bcrypt.compareSync(password, hashedPassword);
+  }
 }
 
 User.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        username: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [6]
-            }
-        }
-        
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
     },
-    {
-        hooks: {
-            beforeCreate: async (userData) => {
-                userData.password = await bcrypt.hash(userData.password, 10);
-                return userData;
-            },
-            beforeUpdate : async (userDataUpdated) => {
-                userData.password = await bcrypt.hash(userData.password, 10);
-                return userData;
-            },
-        },
-        sequelize,
-        timestamps: false,
-        freezeTableName: true,
-        underscored: true,
-        modelName: 'User'
-
-
-    }
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [6],
+      },
+    },
+  },
+  {
+    hooks: {
+      beforeCreate: async (user) => {
+        user.password = await User.hashPassword(user.password);
+        return user;
+      },
+      beforeUpdate: async (user) => {
+        user.password = await User.hashPassword(user.password);
+        return user;
+      },
+    },
+    sequelize,
+    modelName: "User",
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+  }
 );
 
 module.exports = User;
