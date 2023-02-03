@@ -15,9 +15,9 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 
-router.put("/:id", withAuth, async (req, res) => {
+router.delete("/:id", withAuth, async (req, res) => {
   try {
-    const [affectedRows] = await Post.update(req.body, {
+    const [affectedRows] = await Post.destroy({
       where: { id: req.params.id },
     });
     if (affectedRows > 0) {
@@ -29,10 +29,9 @@ router.put("/:id", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-router.delete("/:id", withAuth, async (req, res) => {
+router.put("/:id", withAuth, async (req, res) => {
   try {
-    const [affectedRows] = await Post.destroy({
+    const [affectedRows] = await Post.update(req.body, {
       where: { id: req.params.id },
     });
     if (affectedRows > 0) {
