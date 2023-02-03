@@ -1,20 +1,28 @@
-<div class="card">
-  <div class="card-header">
+<div class="card mt-5 mx-auto" style="width: 40%">
+  <div class="card-header text-center">
     <h2>Login</h2>
   </div>
-  <form id="login-form" class="card-body">
-    <div>
-      <label for="username-input-login">Username</label>
-      <input type="text" id="username-input-login" />
-    </div>
-    <div>
-      <label for="password-input-login" class="form-label">Password</label>
-      <input type="password" id="password-input-login" />
-    </div>
-    <button type="submit" id="login-btn" class="btn">Login!</button>
-    <a type="button" href="/signup">Sign up instead</a>
-  </form>
+  <div class="card-body">
+    <form id="login-form">
+      <div class="form-group">
+        <label for="username-input-login">Username</label>
+        <input type="text" id="username-input-login" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="password-input-login">Password</label>
+        <input type="password" id="password-input-login" class="form-control">
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="submit" id="login-btn" class="btn btn-primary">Login!</button>
+      </div>
+      <div class="text-center mt-3">
+        <a type="button" href="/signup">Go ahead and sign up!</a>
+      </div>
+    </form>
+  </div>
 </div>
-
 <script src="/js/login.js"></script>
+
+
+
 
