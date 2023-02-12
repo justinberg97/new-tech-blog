@@ -46,4 +46,10 @@ https://github.com/justinberg97/new-tech-blog
 
 # Heroku Link 
 
+https://new-tech-blog.herokuapp.com/
+
 # Screenshot of website 
+
+<img width="1440" alt="Screen Shot 2023-02-09 at 11 49 35 PM" src="https://user-images.githubusercontent.com/110484382/218011713-9a771408-bc8e-4923-9392-c1d53c969b0c.png">
+
+
